@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Character Media - The Shaping of a Hero</title>
+  <link rel="stylesheet" href="biological.css"> <!-- If CSS is separated -->
+  <style>
+    /* Inherit all your biological.html CSS here */
+    /* Extra styling for gallery and video grid */
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.5rem;
+      margin: 2rem 0;
+    }
+    .gallery img {
+      width: 100%;
+      border-radius: 10px;
+      cursor: pointer;
+      border: 3px solid #fcd116;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .gallery img:hover {
+      transform: scale(1.05);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+    }
+
+    .video-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+    .video-grid iframe {
+      width: 100%;
+      aspect-ratio: 16/9;
+      border-radius: 10px;
+      border: 4px solid #ce1126;
+      box-shadow: 0 6px 15px rgba(0,0,0,0.2);
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="header-content">
+      <h1>The Shaping of a Hero</h1>
+      <p class="tagline">Exploring José Rizal's Legacy Through Media</p>
+    </div>
+  </header>
+
+  <nav>
+    <div class="nav-container">
+      <button class="mobile-menu-toggle" onclick="toggleMobileMenu()" aria-label="Toggle menu">☰</button>
+      <ul id="nav-menu">
+        <li><a href="index.html">Home</a></li>
+        <li class="dropdown">
+          <a class="dropdown-toggle">Shaping Factors <span class="dropdown-arrow">▼</span></a>
+          <div class="dropdown-menu">
+            <a href="biological.html">Biological Factors</a>
+            <a href="environmental.html">Environmental Factors</a>
+          </div>
+        </li>
+        <li><a href="experiences.html">Life Experiences</a></li>
+        <li><a href="character.html">Character Analysis</a></li>
+        <li><a href="heroism.html">Pitfalls & Heroism</a></li>
+        <li><a href="conclusion.html">Conclusion</a></li>
+        <li class="dropdown">
+          <a class="dropdown-toggle active">See More <span class="dropdown-arrow">▼</span></a>
+          <div class="dropdown-menu">
+            <a href="timeline.html">Timeline</a>
+            <a href="media.html" class="active">Photos & Videos</a>
+            <a href="references.html">References</a>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+  <main>
+    <div class="page-title">
+      <h2>📸 Character Media</h2>
+      <p>A visual and interactive look at José Rizal’s life, influence, and enduring legacy</p>
+    </div>
+
+    <!-- Blog Style Intro -->
+    <div class="content-section">
+      <h3>Media and Legacy</h3>
+      <p>José Rizal’s story has not only been preserved in books but also celebrated in visual and digital media. Through photographs, paintings, documentaries, and films, his legacy continues to inspire new generations. This section provides a curated media repository—ranging from gallery snapshots to video features—that reflects both his humanity and heroism.</p>
+    </div>
+
+    <!-- Image Gallery Section -->
+    <div class="content-section" id="gallery">
+      <h3>Image Gallery</h3>
+      <p>Below is a flexible gallery template featuring placeholders. You may replace these with actual curated photos of Rizal, historical landmarks, or related works of art.</p>
+      <div class="gallery">
+        <img src="https://via.placeholder.com/400x250.png?text=Photo+1" alt="Placeholder 1" onclick="openImageModal(this)">
+        <img src="https://via.placeholder.com/400x250.png?text=Photo+2" alt="Placeholder 2" onclick="openImageModal(this)">
+        <img src="https://via.placeholder.com/400x250.png?text=Photo+3" alt="Placeholder 3" onclick="openImageModal(this)">
+        <img src="https://via.placeholder.com/400x250.png?text=Photo+4" alt="Placeholder 4" onclick="openImageModal(this)">
+      </div>
+    </div>
+
+    <!-- YouTube Repository -->
+    <div class="content-section" id="videos">
+      <h3>YouTube Repository</h3>
+      <p>This repository serves as a flexible and replicable template for embedding YouTube videos. Each frame highlights aspects of Rizal’s life, analysis, or related documentaries.</p>
+      <div class="video-grid">
+        <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="Video 1" allowfullscreen></iframe>
+        <iframe src="https://www.youtube.com/embed/ysz5S6PUM-U" title="Video 2" allowfullscreen></iframe>
+        <iframe src="https://www.youtube.com/embed/ScMzIvxBSi4" title="Video 3" allowfullscreen></iframe>
+      </div>
+    </div>
+
+    <!-- Navigation Buttons -->
+    <div class="nav-buttons">
+      <a href="timeline.html" class="nav-button">← Timeline</a>
+      <a href="references.html" class="nav-button">References →</a>
+    </div>
+  </main>
+
+  <footer>
+    <div class="footer-accent"></div>
+    <p><strong>The Shaping of a Hero: José Rizal's Character Development</strong></p>
+    <p>A comprehensive study of the Philippines' national hero</p>
+    <p class="footer-authors">Summative Project by Tan, James Nathaniel and Masellones, Joshua Marc</p>
+    <p style="margin-top: 1rem; font-size: 0.9rem;">&copy; 2025 - MMCM</p>
+  </footer>
+
+  <!-- Reuse the same image modal script from biological.html -->
+  <div id="imageModal" class="image-modal" onclick="closeImageModal()">
+    <span class="modal-close" onclick="closeImageModal()">&times;</span>
+    <img class="modal-content" id="modalImage">
+  </div>
+
+  <script>
+    // Copy your JS functions from biological.html here (menu, modal, parallax, etc.)
+    function toggleMobileMenu() {
+      document.getElementById('nav-menu').classList.toggle('active');
+    }
+    function openImageModal(img) {
+      const modal = document.getElementById('imageModal');
+      const modalImg = document.getElementById('modalImage');
+      modal.classList.add('active');
+      modalImg.src = img.src;
+      document.body.style.overflow = 'hidden';
+    }
+    function closeImageModal() {
+      const modal = document.getElementById('imageModal');
+      modal.classList.remove('active');
+      document.body.style.overflow = 'auto';
+    }
+  </script>
+</body>
+</html>
