@@ -579,17 +579,6 @@
       position: relative;
       animation: fadeInUp 0.8s ease both;
     }
-    .timeline-event::before {
-      content: "";
-      position: absolute;
-      left: -13px;
-      top: 0.5rem;
-      width: 20px;
-      height: 20px;
-      background: #fcd116;
-      border: 3px solid #ce1126;
-      border-radius: 50%;
-    }
     .timeline-event h4 {
       color: #ce1126;
       font-size: 1.3rem;
@@ -623,7 +612,7 @@
   <header>
     <div class="header-content">
       <h1>The Shaping of a Hero</h1>
-      <p class="tagline">A Complete Timeline of José Rizal’s Life</p>
+      <p class="tagline">A Complete Timeline of José Rizal's Life</p>
     </div>
   </header>
 
@@ -657,70 +646,120 @@
 
   <main>
     <div class="page-title">
-      <h2>⏳ Rizal’s Life Timeline</h2>
+      <h2>⏳ Rizal's Life Timeline</h2>
       <p>A chronological journey from childhood to martyrdom</p>
     </div>
 
     <div class="content-section">
       <h3>Timeline of José Rizal</h3>
-      <p>Below is a detailed account of Rizal’s life milestones—from his birth, education, travels, writings, exile, to his death. Each stage shows how his experiences shaped him into the Philippines’ national hero.</p>
+      <p>Below is a detailed account of Rizal's life milestones—from his birth, education, travels, writings, exile, to his death. Each stage shows how his experiences shaped him into the Philippines' national hero.</p>
 
       <div class="timeline">
 
         <div class="timeline-event">
-          <h4>1861 – Birth in Calamba, Laguna</h4>
+          <h4>1861 – Birth in Calamba, Laguna (June 19)</h4>
           <img src="https://via.placeholder.com/400x250.png?text=Calamba+Birthplace" class="timeline-image" alt="Birthplace" onclick="openImageModal(this)">
-          <p>José Protacio Rizal Mercado y Alonzo Realonda was born on June 19, 1861, in Calamba, Laguna. His well-to-do family valued education and instilled in him discipline and faith.</p>
+          <p>José Protacio Rizal Mercado y Alonzo Realonda was born on June 19, 1861, in Calamba, Laguna, the seventh of eleven children. His parents, Francisco Mercado Rizal and Teodora Alonzo, were well-educated landowners who valued learning and virtue. From birth, Rizal was exposed to a home rich in books, intellectual discourse, and moral teachings that would shape his worldview.</p>
         </div>
 
         <div class="timeline-event">
-          <h4>1870 – Early Education in Biñan</h4>
+          <h4>1865–1870 – Childhood & Early Learning</h4>
+          <p>Young José learned the alphabet from his mother at age three. His mother also introduced him to classic literature and stories that sparked his imagination. By age five, he could read and write. His early tutors included Maestro Celestino, Maestro Lucas Padua, and Leon Monroy. These formative years developed his love for reading, drawing, and sculpting.</p>
+        </div>
+
+        <div class="timeline-event">
+          <h4>1870–1871 – Formal Schooling in Biñan</h4>
+          <img src="https://via.placeholder.com/400x250.png?text=Bagumbayan+Execution" class="timeline-image" alt="Binan" onclick="openImageModal(this)">
           <img src="https://via.placeholder.com/400x250.png?text=Early+Education" class="timeline-image" alt="Biñan Education" onclick="openImageModal(this)">
-          <p>Rizal was sent to Biñan for his early formal education. His uncle and teachers quickly recognized his extraordinary intelligence and curiosity.</p>
+          <p>At age nine, Rizal was sent to Biñan, Laguna to study under Maestro Justiniano Aquino Cruz. He excelled in his studies and became admired for his penmanship, sketching, and scholastic ability. However, he also witnessed the harsh realities of colonial education, including corporal punishment and favoritism, experiences that left lasting impressions.</p>
         </div>
 
         <div class="timeline-event">
-          <h4>1877 – Ateneo Municipal de Manila</h4>
+          <h4>1872 – Martyrdom of GOMBURZA</h4>
+          <img src="https://via.placeholder.com/400x250.png?text=Bagumbayan+Execution" class="timeline-image" alt="GOMBURZA" onclick="openImageModal(this)">
+          <p>The execution of three Filipino priests—Mariano Gómez, José Burgos, and Jacinto Zamora—on charges of subversion profoundly affected the young Rizal. His mother told him about their deaths, and this event became a turning point in his consciousness about Spanish oppression. This tragedy would later inspire his writings and advocacy for reform.</p>
+        </div>
+
+        <div class="timeline-event">
+          <h4>1872–1877 – Ateneo Municipal de Manila</h4>
           <img src="https://via.placeholder.com/400x250.png?text=Ateneo+Student" class="timeline-image" alt="Ateneo Student" onclick="openImageModal(this)">
-          <p>At just 16 years old, Rizal graduated with the highest honors in Bachelor of Arts at Ateneo. He demonstrated skill in poetry, painting, and sciences.</p>
+          <p>At age 11, Rizal enrolled in Ateneo under the name "José Rizal" (dropping "Mercado" due to his brother's political troubles). He consistently achieved top honors, becoming an "Emperor" in academics. He studied rhetoric, poetry, Greek, and various sciences. Under Father Francisco de Paula Sánchez, Rizal honed his literary talents and developed a deep appreciation for the humanities. He also joined the Marian Congregation and became active in school literary contests.</p>
         </div>
 
         <div class="timeline-event">
           <h4>1878–1882 – University of Santo Tomas</h4>
-          <p>Rizal studied philosophy and medicine at UST but faced discrimination as a Filipino. This experience deepened his awareness of colonial injustices.</p>
+          <img src="https://via.placeholder.com/400x250.png?text=Bagumbayan+Execution" class="timeline-image" alt="Tomas" onclick="openImageModal(this)">
+          <p>Rizal initially took a course in Philosophy and Letters at UST (1877–1879), then shifted to Medicine to cure his mother's failing eyesight. However, he became disillusioned with the discriminatory Dominican professors who belittled Filipino students. The prejudice and outdated teaching methods at UST reinforced his desire to seek better education abroad and fueled his reformist ideals.</p>
         </div>
 
         <div class="timeline-event">
-          <h4>1882 – Travels to Europe</h4>
+          <h4>1882 – Secret Departure to Europe (May 3)</h4>
           <img src="https://via.placeholder.com/400x250.png?text=Europe+Studies" class="timeline-image" alt="Europe Studies" onclick="openImageModal(this)">
-          <p>At 21, Rizal left for Spain and enrolled in Universidad Central de Madrid. He earned degrees in medicine and philosophy, and later continued studies in Paris and Heidelberg, Germany.</p>
+          <p>Without his parents' full knowledge, Rizal boarded the ship Salvadora bound for Spain. He left behind a letter explaining his pursuit of higher education and better opportunities. Upon arrival in Barcelona, he was amazed by the freedom and intellectual climate of Europe, a stark contrast to the repressive atmosphere in the Philippines.</p>
         </div>
 
         <div class="timeline-event">
-          <h4>1887 – Publication of Noli Me Tangere</h4>
-          <p>His first novel exposed colonial injustices. It was banned in the Philippines but secretly circulated, sparking nationalist sentiments.</p>
+          <h4>1882–1885 – Studies in Madrid & European Travels</h4>
+          <img src="https://via.placeholder.com/400x250.png?text=Bagumbayan+Execution" class="timeline-image" alt="Madrid" onclick="openImageModal(this)">
+          <p>Rizal enrolled at Universidad Central de Madrid, where he completed degrees in Medicine and Philosophy and Letters. He also studied painting and sculpture, attended literary gatherings, and wrote essays criticizing Spanish rule. During this period, he traveled across Europe—visiting France, Germany, Austria, Switzerland, and Italy—absorbing ideas from the Enlightenment and the European liberal movements.</p>
         </div>
 
         <div class="timeline-event">
-          <h4>1891 – Publication of El Filibusterismo</h4>
-          <p>His second novel was darker in tone, reflecting the growing unrest of Filipinos. It revealed Rizal’s disappointment in peaceful reforms.</p>
+          <h4>1885–1887 – Specialization in Ophthalmology</h4>
+          <p>Rizal studied ophthalmology under renowned doctors in Paris (Dr. Louis de Wecker) an`d Heidelberg, Germany (Dr. Otto Becker). His motivation was to cure his mother's eye condition. He successfully performed cataract surgery on her upon his return to the Philippines.</p>
         </div>
 
         <div class="timeline-event">
-          <h4>1892 – Founding of La Liga Filipina</h4>
+          <h4>1887 – Publication of Noli Me Tangere (March 21)</h4>
+          <img src="https://via.placeholder.com/400x250.png?text=Bagumbayan+Execution" class="timeline-image" alt="Noli" onclick="openImageModal(this)">
+          <p>Rizal's groundbreaking novel, "Noli Me Tangere" (Touch Me Not), was published in Berlin. The book exposed the abuses of Spanish friars and government officials through the story of Crisóstomo Ibarra. It was immediately banned in the Philippines, but copies were smuggled and circulated secretly. The novel awakened Filipino consciousness and is considered the spark that ignited the revolution. Rizal financed the publication himself after facing financial difficulties.</p>
+        </div>
+
+        <div class="timeline-event">
+          <h4>1887–1888 – Return to the Philippines</h4>
+          <img src="https://via.placeholder.com/400x250.png?text=Bagumbayan+Execution" class="timeline-image" alt="Return" onclick="openImageModal(this)">
+          <p>Rizal returned home in August 1887 but faced hostility from Spanish authorities who viewed him as a subversive. After six months, threats to his safety forced him to leave again for Europe in February 1888. During this brief stay, he practiced medicine, reunited with his family, and witnessed firsthand the impact of his novel.</p>
+        </div>
+
+        <div class="timeline-event">
+          <h4>1888–1891 – Second European Sojourn</h4>
+          <p>Rizal continued his research, writing, and activism. He annotated Antonio de Morga's "Sucesos de las Islas Filipinas" to prove that Filipinos had a rich pre-colonial civilization. He worked on his second novel and contributed articles to La Solidaridad, the reformist newspaper. He also traveled to London, Brussels, Madrid, and Paris, connecting with fellow Filipino expatriates and reformists.</p>
+        </div>
+
+        <div class="timeline-event">
+          <h4>1891 – Publication of El Filibusterismo (September)</h4>
+          <img src="https://via.placeholder.com/400x250.png?text=Bagumbayan+Execution" class="timeline-image" alt="Publication" onclick="openImageModal(this)">
+          <p>Rizal's second and darker novel, "El Filibusterismo" (The Reign of Greed), was published in Ghent, Belgium. It served as a sequel to Noli, showing the radicalization of its characters and depicting the consequences of colonial oppression. The protagonist Simoun represents the path of violent revolution—a path Rizal himself did not advocate, but understood. This novel reflected his growing frustration with the failure of peaceful reforms.</p>
+        </div>
+
+        <div class="timeline-event">
+          <h4>1892 – Founding of La Liga Filipina (July 3)</h4>
           <img src="https://via.placeholder.com/400x250.png?text=La+Liga+Filipina" class="timeline-image" alt="La Liga Filipina" onclick="openImageModal(this)">
-          <p>Rizal returned to Manila and organized La Liga Filipina, a reformist society calling for peaceful change. Within days, he was arrested and exiled to Dapitan.</p>
+          <p>Upon returning to Manila, Rizal founded La Liga Filipina, a civic organization aimed at uniting Filipinos and pursuing reforms through peaceful means. Its goals included mutual protection, defense against violence and injustice, encouragement of education and commerce, and study of reforms. Just four days after its founding, on July 6, 1892, Rizal was arrested and charged with being "an enemy of the State."</p>
         </div>
 
         <div class="timeline-event">
-          <h4>1892–1896 – Exile in Dapitan</h4>
-          <p>During exile, Rizal worked as a doctor, teacher, scientist, and community builder. He lived productively and contributed to education and medicine in Mindanao.</p>
+          <h4>1892–1896 – Exile in Dapitan, Zamboanga</h4>
+          <img src="https://via.placeholder.com/400x250.png?text=Bagumbayan+Execution" class="timeline-image" alt="Exile" onclick="openImageModal(this)">
+          <p>Rizal spent four years in exile in Dapitan, a remote town in Mindanao. Far from being idle, he established a school for boys, built a water system, designed a town plaza, practiced medicine (treating over 900 patients), conducted scientific research (discovering three new species), engaged in farming and business ventures, and continued his artistic pursuits. He also met and fell in love with Josephine Bracken, an Irish woman who became his common-law wife. These productive years showcased Rizal's versatility and dedication to improving society even in isolation.</p>
         </div>
 
         <div class="timeline-event">
-          <h4>1896 – Arrest and Execution</h4>
+          <h4>1896 – The Katipunan Revolution Erupts (August)</h4>
+          <img src="https://via.placeholder.com/400x250.png?text=Bagumbayan+Execution" class="timeline-image" alt="Revolution" onclick="openImageModal(this)">
+          <p>While Rizal was in Dapitan, Andrés Bonifacio founded the Katipunan, a secret revolutionary society. When the revolution broke out in August 1896, Spanish authorities immediately suspected Rizal's involvement, despite his advocacy for peaceful reform. The Katipuneros even used Rizal's name to inspire their cause, though Rizal never sanctioned armed revolution.</p>
+        </div>
+
+        <div class="timeline-event">
+          <h4>1896 – Arrest, Trial, and Execution (December 30)</h4>
           <img src="https://via.placeholder.com/400x250.png?text=Bagumbayan+Execution" class="timeline-image" alt="Execution" onclick="openImageModal(this)">
-          <p>Rizal was executed on December 30, 1896, in Bagumbayan (Luneta). His death fueled the Philippine Revolution, cementing his legacy as the national hero.</p>
+          <p>Rizal was arrested aboard a ship en route to Cuba (where he volunteered as a military doctor) and brought back to Manila. He was imprisoned in Fort Santiago and tried by a military court. Despite lack of evidence linking him to the Katipunan, he was found guilty of rebellion, sedition, and conspiracy. On December 30, 1896, at 7:03 AM, Rizal faced the firing squad at Bagumbayan Field (now Rizal Park/Luneta). His last words were "Consummatum est" (It is finished). The night before his execution, he wrote his famous poem "Mi Último Adiós" (My Last Farewell), a masterpiece of patriotic literature. His martyrdom galvanized the Philippine Revolution and solidified his status as the national hero.</p>
+        </div>
+
+        <div class="timeline-event">
+          <h4>Legacy & Commemoration</h4>
+          <img src="https://via.placeholder.com/400x250.png?text=Bagumbayan+Execution" class="timeline-image" alt="Death" onclick="openImageModal(this)">
+          <p>Rizal's death transformed him from reformist to revolutionary icon. In 1898, the Philippine Revolution succeeded in declaring independence. By 1901, American colonial authorities declared Rizal as the Philippine National Hero—a strategic choice to promote peaceful reform over revolutionary violence. Today, Rizal's birthday (June 19) and death anniversary (December 30, now called Rizal Day) are national holidays. His life, works, and ideals continue to inspire Filipinos toward nationalism, education, social justice, and moral excellence.</p>
         </div>
 
       </div>
