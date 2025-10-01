@@ -8,6 +8,12 @@ Requirements:
 * Do not include the quote sections as this is for the HOME page only.
 * Do not forget to add #Sections from the Home Page
 
+Add This Code at the bottom before the footer:
+<div class="nav-buttons">
+            <a href="environmental.html" class="nav-button">← Environmental Factors</a>
+            <a href="character.html" class="nav-button">Character Analysis →</a>
+</div>
+
 You May Include This Ideas / Paragraph When Making.
 IV. Life Experiences
 A. Experiences Abroad
