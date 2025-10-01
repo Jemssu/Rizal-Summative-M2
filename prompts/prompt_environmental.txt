@@ -1,0 +1,32 @@
+ This is the Home Page of our Blog Site.
+I want you to make me the Environmental Factors Page.
+Please Copy the Theme and Styling of the Home Page.
+Requirements:
+* Interactive
+* Add Placeholder Images
+* Should be in Paragraph Form like Blogs. But there may be bullet forms
+* Do not include the quote sections as this is for the HOME page only.
+* Do not forget to add #Sections from the Home Page
+
+You May Include This Ideas / Paragraph When Making.
+III. Environmental Factors
+A. Family Background and Upbringing
+Rizal’s family provided the foundation for his character. His mother, 
+
+Doña Teodora, served as his first teacher, nurturing his foundational reading and writing skills. Growing up in an affluent 
+
+Illustrado family in Calamba instilled in him early values of love, affection, and loyalty. His father, Francisco Mercado, and mother were tenants on a vast Dominican-owned estate, giving the family direct experience with the oppressive practices and financial hardships inflicted by the friar orders.
+
+B. Educational Experiences
+Rizal consistently stressed that 
+
+proper education should always be prioritized for individual and national success. He achieved academic excellence throughout his schooling, graduating from Ateneo Municipal with a Bachelor of Arts degree and highest honors. In Manila, he began using the surname "Rizal" to avoid the suspicion of Spanish authorities. He later earned multiple degrees at the Universidad Central de Madrid, including Licentiates in Medicine and Philosophy and Letters, the latter with an 
+
+Excellent (Sobrasaliente) rating that entitled him to a university professorship.
+
+C. Social and Political Context of the Philippines
+The defining political event of Rizal's youth was the 
+
+martyrdom of the three Filipino priests, Gomburza, in 1872, an event that fueled his early nationalist sentiments. This social and political context, combined with his family’s experience in the 
+
+Calamba Agrarian Unrest—where tenants faced arbitrary rent increases, high interest rates, and expulsions by the Dominican Order—solidified his resolve to use his education to critique the colonial system.

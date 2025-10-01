@@ -1,0 +1,2 @@
+This is the Biological Factors Page of our Blog Site.
+Could you please apply the changes that I did here (especially the navigation panel to the home page)

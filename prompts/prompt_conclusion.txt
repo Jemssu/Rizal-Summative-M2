@@ -1,0 +1,13 @@
+This is the Home Page of our Blog Site.
+I want you to make me the Conclusion Page.
+Please Copy the Theme and Styling of the Home Page.
+Requirements:
+* Interactive
+* Add Placeholder Images
+* Should be in Paragraph Form like Blogs. But there may be bullet forms
+* Do not include the quote sections as this is for the HOME page only.
+* Do not forget to add #Sections from the Home Page
+
+You May Include This Ideas / Paragraph When Making.
+VI. Conclusion
+José Rizal’s heroism was the inevitable culmination of innate talent refined by an exceptional environment and tempered by relentless political adversity. His character was built upon the bedrock of his family’s Illustrado values, his liberal and advanced education, and the catalytic influence of events like the Gomburza martyrdom and the Calamba land dispute. Through his writing and eventual martyrdom, he achieved his stated purpose: to use his suffering to succeed, giving his life to serve his country and becoming the central figure in the shaping of the Filipino national consciousness.
