@@ -1,0 +1,848 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Shaping of a Hero: José Rizal's Character Development</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', serif;
+            line-height: 1.6;
+            color: #000;
+            background-color: #f8f9fa;
+            opacity: 0;
+            animation: fadeIn 0.8s ease-in forwards;
+        }
+
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+            }
+        }
+
+        /* Loading Screen */
+        #loading-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #0038a8 0%, #ce1126 100%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            transition: opacity 0.5s ease, visibility 0.5s ease;
+        }
+
+        #loading-screen.hidden {
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .loader {
+            width: 60px;
+            height: 60px;
+            border: 5px solid rgba(255,255,255,0.3);
+            border-top-color: #fcd116;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .loading-text {
+            color: white;
+            font-size: 1.2rem;
+            margin-top: 1.5rem;
+            letter-spacing: 2px;
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(135deg, #0038a8 0%, #ce1126 100%);
+            color: white;
+            padding: 2rem 0;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            position: relative;
+            overflow: hidden;
+            animation: slideDown 0.6s ease-out 0.3s both;
+        }
+
+        @keyframes slideDown {
+            from {
+                transform: translateY(-100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg"><circle cx="50" cy="50" r="40" fill="none" stroke="rgba(252,209,22,0.1)" stroke-width="2"/></svg>');
+            opacity: 0.3;
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .tagline {
+            font-size: 1.1rem;
+            font-style: italic;
+            opacity: 0.95;
+        }
+
+        /* Navigation */
+        nav {
+            background-color: #fff;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            animation: slideDown 0.6s ease-out 0.5s both;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            flex-wrap: wrap;
+        }
+
+        nav li {
+            margin: 0;
+        }
+
+        nav a {
+            display: block;
+            padding: 1rem 1.5rem;
+            color: #000;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            border-bottom: 3px solid transparent;
+        }
+
+        nav a:hover {
+            background-color: #fcd116;
+            border-bottom-color: #ce1126;
+            transform: translateY(-2px);
+        }
+
+        nav a.active {
+            background-color: #0038a8;
+            color: white;
+            border-bottom-color: #fcd116;
+        }
+
+        /* Dropdown */
+        .dropdown {
+            position: relative;
+        }
+
+        .dropdown-toggle {
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+            cursor: pointer;
+        }
+
+        .dropdown-arrow {
+            font-size: 0.7rem;
+            transition: transform 0.3s ease;
+        }
+
+        .dropdown:hover .dropdown-arrow {
+            transform: rotate(180deg);
+        }
+
+        .dropdown-menu {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: white;
+            min-width: 220px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            border-radius: 0 0 8px 8px;
+            overflow: hidden;
+            z-index: 1000;
+        }
+
+        .dropdown:hover .dropdown-menu {
+            display: block;
+            animation: fadeInDown 0.3s ease;
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .dropdown-menu a {
+            display: block;
+            padding: 0.75rem 1.5rem;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .dropdown-menu a:last-child {
+            border-bottom: none;
+        }
+
+        .dropdown-menu a:hover {
+            background-color: #fcd116;
+            border-bottom-color: transparent;
+        }
+
+        /* Main Content */
+        main {
+            max-width: 1200px;
+            margin: 3rem auto;
+            padding: 0 2rem;
+        }
+
+        /* Quote Section */
+        .quote-section {
+            background: linear-gradient(135deg, rgba(0, 56, 168, 0.05), rgba(206, 17, 38, 0.05));
+            padding: 2.5rem;
+            border-radius: 10px;
+            margin-bottom: 3rem;
+            border-left: 6px solid #fcd116;
+            position: relative;
+            animation: fadeInUp 0.6s ease-out 0.7s both;
+        }
+
+        .quote-content {
+            display: flex;
+            align-items: flex-start;
+            gap: 1.5rem;
+        }
+
+        .quote-icon {
+            font-size: 3rem;
+            color: #0038a8;
+            opacity: 0.3;
+            line-height: 1;
+        }
+
+        .quote-text-container {
+            flex: 1;
+        }
+
+        .quote-text {
+            font-size: 1.2rem;
+            font-style: italic;
+            color: #333;
+            line-height: 1.8;
+            margin-bottom: 1rem;
+        }
+
+        .quote-author {
+            font-size: 1rem;
+            color: #ce1126;
+            font-weight: 600;
+            text-align: right;
+        }
+
+        .quote-button {
+            background: linear-gradient(135deg, #0038a8, #ce1126);
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 0.95rem;
+            font-weight: 600;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            margin-top: 1rem;
+            display: inline-block;
+        }
+
+        .quote-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Hero Section */
+        .hero {
+            background: white;
+            padding: 3rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            margin-bottom: 3rem;
+            border-left: 6px solid #ce1126;
+            border-right: 6px solid #0038a8;
+            position: relative;
+            overflow: hidden;
+            display: grid;
+            grid-template-columns: 1fr 280px;
+            gap: 3rem;
+            align-items: center;
+            animation: fadeInUp 0.6s ease-out 0.9s both;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -10%;
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, rgba(252,209,22,0.1) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero h2 {
+            color: #0038a8;
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            position: relative;
+        }
+
+        .hero-intro {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: #333;
+            position: relative;
+        }
+
+        .hero-image-container {
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-image {
+            width: 100%;
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+            border: 4px solid #fcd116;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .hero-image:hover {
+            transform: scale(1.02);
+            box-shadow: 0 12px 30px rgba(0,0,0,0.3);
+        }
+
+        .image-caption {
+            text-align: center;
+            font-size: 0.85rem;
+            color: #666;
+            font-style: italic;
+            margin-top: 0.75rem;
+            line-height: 1.4;
+        }
+
+        /* Thesis Statement */
+        .thesis {
+            background: linear-gradient(135deg, rgba(0, 56, 168, 0.05), rgba(206, 17, 38, 0.05));
+            padding: 2rem;
+            border-radius: 10px;
+            border-left: 6px solid #fcd116;
+            margin-bottom: 3rem;
+            position: relative;
+            transition: transform 0.3s ease;
+            animation: fadeInUp 0.6s ease-out 1.1s both;
+        }
+
+        .thesis:hover {
+            transform: translateX(5px);
+        }
+
+        .thesis h3 {
+            color: #0038a8;
+            margin-bottom: 1rem;
+        }
+
+        .thesis p {
+            font-size: 1.1rem;
+            font-style: italic;
+            color: #333;
+            line-height: 1.8;
+        }
+
+        /* Sections Grid */
+        .sections-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .section-card {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            overflow: hidden;
+            animation: fadeInUp 0.6s ease-out both;
+        }
+
+        .section-card:nth-child(1) { animation-delay: 1.3s; }
+        .section-card:nth-child(2) { animation-delay: 1.4s; }
+        .section-card:nth-child(3) { animation-delay: 1.5s; }
+        .section-card:nth-child(4) { animation-delay: 1.6s; }
+        .section-card:nth-child(5) { animation-delay: 1.7s; }
+        .section-card:nth-child(6) { animation-delay: 1.8s; }
+
+        .section-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 20px rgba(0,0,0,0.15);
+        }
+
+        .card-image {
+            width: 100%;
+            height: 180px;
+            background: linear-gradient(135deg, #0038a8 0%, #ce1126 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card-image::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: repeating-linear-gradient(
+                45deg,
+                transparent,
+                transparent 10px,
+                rgba(255,255,255,0.05) 10px,
+                rgba(255,255,255,0.05) 20px
+            );
+        }
+
+        .card-icon {
+            font-size: 4rem;
+            position: relative;
+            z-index: 1;
+            transition: transform 0.3s ease;
+        }
+
+        .section-card:hover .card-icon {
+            transform: scale(1.1) rotate(5deg);
+        }
+
+        .card-content {
+            padding: 2rem;
+            border-top: 4px solid #fcd116;
+        }
+
+        .section-card h3 {
+            color: #ce1126;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .section-card ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .section-card li {
+            padding: 0.5rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+            color: #333;
+            transition: padding-left 0.3s ease;
+        }
+
+        .section-card li:hover {
+            padding-left: 2rem;
+        }
+
+        .section-card li:before {
+            content: "▸";
+            position: absolute;
+            left: 0;
+            color: #fcd116;
+            font-weight: bold;
+            transition: left 0.3s ease;
+        }
+
+        .section-card li:hover:before {
+            left: 0.5rem;
+        }
+
+        .section-card a {
+            color: #0038a8;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .section-card a:hover {
+            color: #ce1126;
+            text-decoration: underline;
+        }
+
+        /* Footer */
+        footer {
+            background: linear-gradient(135deg, #ce1126 0%, #0038a8 100%);
+            color: white;
+            text-align: center;
+            padding: 2.5rem 2rem;
+            margin-top: 4rem;
+            position: relative;
+        }
+
+        footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: #fcd116;
+        }
+
+        footer p {
+            margin: 0.5rem 0;
+        }
+
+        .footer-accent {
+            display: inline-block;
+            width: 60px;
+            height: 3px;
+            background-color: #fcd116;
+            margin: 1rem auto;
+        }
+
+        .footer-authors {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-top: 1rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 1.8rem;
+            }
+
+            .hero {
+                padding: 2rem;
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .hero-image-container {
+                order: -1;
+            }
+
+            nav ul {
+                flex-direction: column;
+                padding: 0;
+            }
+
+            nav a {
+                border-bottom: 1px solid #eee;
+            }
+
+            .sections-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .card-image {
+                height: 150px;
+            }
+
+            .card-icon {
+                font-size: 3rem;
+            }
+
+            .quote-content {
+                flex-direction: column;
+            }
+
+            .quote-icon {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="loading-screen">
+        <div class="loader"></div>
+        <p class="loading-text">A Life and Works of Rizal Project is Loading...</p>
+    </div>
+
+    <header>
+        <div class="header-content">
+            <h1>The Shaping of a Hero</h1>
+            <p class="tagline">Exploring José Rizal's Character Development</p>
+        </div>
+    </header>
+
+    <nav>
+        <ul>
+            <li><a href="index.html" class="active">Home</a></li>
+            <li class="dropdown">
+                <a class="dropdown-toggle" onclick="return false;">
+                    Shaping Factors
+                    <span class="dropdown-arrow">▼</span>
+                </a>
+                <div class="dropdown-menu">
+                    <a href="biological.html">Biological Factors</a>
+                    <a href="environmental.html">Environmental Factors</a>
+                </div>
+            </li>
+            <li><a href="experiences.html">Life Experiences</a></li>
+            <li><a href="character.html">Character Analysis</a></li>
+            <li><a href="heroism.html">Pitfalls & Heroism</a></li>
+            <li><a href="conclusion.html">Conclusion</a></li>
+            <li class="dropdown">
+                <a class="dropdown-toggle" onclick="return false;">
+                    See More
+                    <span class="dropdown-arrow">▼</span>
+                </a>
+                <div class="dropdown-menu">
+                    <a href="timeline.html">Timeline</a>
+                    <a href="media.html">Photos & Videos</a>
+                    <a href="references.html">References</a>
+                </div>
+            </li>
+        </ul>
+    </nav>
+
+    <main>
+        <div class="quote-section">
+            <div class="quote-content">
+                <div class="quote-icon">"</div>
+                <div class="quote-text-container">
+                    <p class="quote-text" id="quote-text"></p>
+                    <p class="quote-author">— José Rizal</p>
+                    <button class="quote-button" onclick="changeQuote()">Next Quote</button>
+                </div>
+            </div>
+        </div>
+
+        <section class="hero">
+            <div class="hero-content">
+                <h2>Introduction: Understanding José Rizal</h2>
+                <p class="hero-intro">
+                    José Protacio Rizal Mercado y Alonso Realonda (1861-1896) stands as the Philippines' foremost national hero, a polymath whose writings and sacrifice ignited the Filipino consciousness during Spanish colonial rule. His novels, <em>Noli Me Tangere</em> and <em>El Filibusterismo</em>, exposed the injustices of colonialism and inspired a nation to seek independence. This blog explores the multifaceted factors that shaped Rizal's character, examining how his biological inheritance, environmental influences, and life experiences converged to create a hero whose legacy continues to inspire generations.
+                </p>
+            </div>
+            <div class="hero-image-container">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c9/Jose_Rizal_full.jpg/800px-Jose_Rizal_full.jpg" alt="José Rizal" class="hero-image">
+                <p class="image-caption">José Rizal, Philippine national hero, writer, and polymath who inspired the Philippine Revolution through his literary works and peaceful reform advocacy.</p>
+            </div>
+        </section>
+
+        <div class="thesis">
+            <h3>Thesis Statement</h3>
+            <p>
+                José Rizal's heroic character was not born but meticulously shaped through a complex interplay of inherited traits, nurturing family values, rigorous education, exposure to global cultures, and the crucible of personal sacrifice—demonstrating that true heroism emerges from the convergence of nature, nurture, and conscious moral choices in the face of adversity.
+            </p>
+        </div>
+
+        <div class="sections-grid">
+            <div class="section-card">
+                <div class="card-image">
+                    <div class="card-icon">🧬</div>
+                </div>
+                <div class="card-content">
+                    <h3>Biological Factors</h3>
+                    <ul>
+                        <li><a href="biological.html#inherited">Inherited Traits & Characteristics</a></li>
+                        <li><a href="biological.html#physical">Physical Attributes & Their Impact</a></li>
+                        <li><a href="biological.html#intellect">Natural Intelligence & Abilities</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="section-card">
+                <div class="card-image">
+                    <div class="card-icon">🏛️</div>
+                </div>
+                <div class="card-content">
+                    <h3>Environmental Factors</h3>
+                    <ul>
+                        <li><a href="environmental.html#family">Family Background & Upbringing</a></li>
+                        <li><a href="environmental.html#education">Educational Experiences</a></li>
+                        <li><a href="environmental.html#context">Social & Political Context</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="section-card">
+                <div class="card-image">
+                    <div class="card-icon">🌏</div>
+                </div>
+                <div class="card-content">
+                    <h3>Life Experiences</h3>
+                    <ul>
+                        <li><a href="experiences.html#abroad">Experiences Abroad</a></li>
+                        <li><a href="experiences.html#dapitan">Life in Dapitan</a></li>
+                        <li><a href="experiences.html#execution">Arrest, Trial, and Execution</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="section-card">
+                <div class="card-image">
+                    <div class="card-icon">⚖️</div>
+                </div>
+                <div class="card-content">
+                    <h3>Character Analysis</h3>
+                    <ul>
+                        <li><a href="character.html#virtues">Virtues & Strengths</a></li>
+                        <li><a href="character.html#weaknesses">Shortcomings & Weaknesses</a></li>
+                        <li><a href="character.html#evolution">Evolution Over Time</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="section-card">
+                <div class="card-image">
+                    <div class="card-icon">⭐</div>
+                </div>
+                <div class="card-content">
+                    <h3>Pitfalls & Heroism</h3>
+                    <ul>
+                        <li><a href="heroism.html#challenges">Challenges & Obstacles Faced</a></li>
+                        <li><a href="heroism.html#heroic">Heroic Acts & Contributions</a></li>
+                        <li><a href="heroism.html#impact">Impact on Philippine Independence</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="section-card">
+                <div class="card-image">
+                    <div class="card-icon">📜</div>
+                </div>
+                <div class="card-content">
+                    <h3>Conclusion</h3>
+                    <ul>
+                        <li><a href="conclusion.html#summary">Summary of Findings</a></li>
+                        <li><a href="conclusion.html#legacy">Reflection on Rizal's Legacy</a></li>
+                        <li><a href="conclusion.html#relevance">Modern-Day Relevance</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="footer-accent"></div>
+        <p><strong>The Shaping of a Hero: José Rizal's Character Development</strong></p>
+        <p>A comprehensive study of the Philippines' national hero</p>
+        <p class="footer-authors">Summative Project by Tan, James Nathaniel and Masellones, Joshua Marc</p>
+        <p style="margin-top: 1rem; font-size: 0.9rem;">&copy; 2025 - MMCM</p>
+    </footer>
+
+    <script>
+        // Loading screen
+        window.addEventListener('load', function() {
+            setTimeout(function() {
+                document.getElementById('loading-screen').classList.add('hidden');
+            }, 1500);
+        });
+
+        // Rizal Quotes
+        const quotes = [
+            "One only dies once, and if one does not die well, a good opportunity is lost and will not present itself again.",
+            "I have to believe much in God because I have lost my faith in man.",
+            "He who does not know how to look back at where he came from will never get to his destination.",
+            "Cowardice rightly understood begins with selfishness and ends with shame.",
+            "Our liberty will not be secured at the sword's point... We must secure it by making ourselves worthy of it. And when the people reaches that height, God will provide a weapon, the idols will be shattered, tyranny will crumble like a house of cards, and liberty will shine out like the first dawn.",
+            "I don't see why I should bow my head when I could hold it high, or place it in the hands of my enemies when I can defeat them.",
+            "There are no tyrants if there are no slaves.",
+            "The people do not complain because they have no voice; do not move because they are lethargic, and you say that they do not suffer because you have not seen their hearts bleed.",
+            "I die without seeing dawn's light shining on my country... You, who will see it, welcome it for me...don't forget those who fell during the nighttime.",
+            "To be happy does not mean to indulge in foolishness!",
+            "I have observed that the prosperity or misery of each people is in direct proportion to its liberties or its prejudices and, accordingly, to the sacrifices or the selfishness of its forefathers.",
+            "It is not the criminals who arouse the hatred of others, but the men who are honest.",
+            "Why independence, if the slaves of today will be the tyrants of tomorrow?",
+            "Tomorrow at 7, I shall be shot; but I am innocent of the crime of rebellion. I am going to die with a tranquil conscience.",
+            "For myself I think that one wrong does not right the other, and forgiveness cannot be won with useless tears or alms to the Church.",
+            "I honor the father in his son, not the son in his father. Each one receives a reward or punishment for his deeds, but not for the acts of others."
+        ];
+
+        let currentQuoteIndex = Math.floor(Math.random() * quotes.length);
+
+        function displayQuote() {
+            document.getElementById('quote-text').textContent = quotes[currentQuoteIndex];
+        }
+
+        function changeQuote() {
+            const quoteElement = document.getElementById('quote-text');
+            quoteElement.style.opacity = '0';
+            
+            setTimeout(() => {
+                currentQuoteIndex = (currentQuoteIndex + 1) % quotes.length;
+                displayQuote();
+                quoteElement.style.opacity = '1';
+            }, 300);
+        }
+
+        // Initialize quote on load
+        displayQuote();
+        document.getElementById('quote-text').style.transition = 'opacity 0.3s ease';
+
+        
+    </script>
+    
+</body> 
+</html> 
+
+
+

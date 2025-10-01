@@ -1,0 +1,806 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Biological Factors - The Shaping of a Hero</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', serif;
+            line-height: 1.6;
+            color: #000;
+            background-color: #f8f9fa;
+            opacity: 0;
+            animation: fadeIn 0.8s ease-in forwards;
+        }
+
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+            }
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(135deg, #0038a8 0%, #ce1126 100%);
+            color: white;
+            padding: 2rem 0;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            position: relative;
+            overflow: hidden;
+            animation: slideDown 0.6s ease-out 0.3s both;
+        }
+
+        @keyframes slideDown {
+            from {
+                transform: translateY(-100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg"><circle cx="50" cy="50" r="40" fill="none" stroke="rgba(252,209,22,0.1)" stroke-width="2"/></svg>');
+            opacity: 0.3;
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .tagline {
+            font-size: 1.1rem;
+            font-style: italic;
+            opacity: 0.95;
+        }
+
+        /* Navigation */
+        nav {
+            background-color: #fff;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            animation: slideDown 0.6s ease-out 0.5s both;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .mobile-menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            padding: 0.5rem;
+            color: #0038a8;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            margin: 0;
+            padding: 0;
+            flex-wrap: wrap;
+        }
+
+        nav li {
+            margin: 0;
+        }
+
+        nav a {
+            display: block;
+            padding: 1rem 1.5rem;
+            color: #000;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            border-bottom: 3px solid transparent;
+        }
+
+        nav a:hover {
+            background-color: #fcd116;
+            border-bottom-color: #ce1126;
+            transform: translateY(-2px);
+        }
+
+        nav a.active {
+            background-color: #0038a8;
+            color: white;
+            border-bottom-color: #fcd116;
+        }
+
+        /* Dropdown */
+        .dropdown {
+            position: relative;
+        }
+
+        /* Show dropdown on hover (desktop only) */
+        @media (min-width: 769px) {
+            .dropdown:hover .dropdown-menu {
+                display: block;
+                animation: fadeInDown 0.3s ease;
+            }
+
+            .dropdown:hover .dropdown-arrow {
+                transform: rotate(180deg);
+            }
+        }
+
+
+        .dropdown-toggle {
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+            cursor: pointer;
+        }
+
+        .dropdown-arrow {
+            font-size: 0.7rem;
+            transition: transform 0.3s ease;
+        }
+
+        .dropdown.active .dropdown-arrow {
+            transform: rotate(180deg);
+        }
+
+        .dropdown-menu {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: white;
+            min-width: 220px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            border-radius: 0 0 8px 8px;
+            overflow: hidden;
+            z-index: 1000;
+        }
+
+        .dropdown.active .dropdown-menu {
+            display: block;
+            animation: fadeInDown 0.3s ease;
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .dropdown-menu a {
+            display: block;
+            padding: 0.75rem 1.5rem;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .dropdown-menu a:last-child {
+            border-bottom: none;
+        }
+
+        .dropdown-menu a:hover {
+            background-color: #fcd116;
+            border-bottom-color: transparent;
+        }
+
+        /* Main Content */
+        main {
+            max-width: 1200px;
+            margin: 3rem auto;
+            padding: 0 2rem;
+        }
+
+        /* Page Title */
+        .page-title {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            margin-bottom: 3rem;
+            border-left: 6px solid #ce1126;
+            animation: fadeInUp 0.6s ease-out 0.7s both;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .page-title h2 {
+            color: #0038a8;
+            font-size: 2.2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .page-title p {
+            color: #666;
+            font-size: 1.1rem;
+            font-style: italic;
+        }
+
+        /* Content Section */
+        .content-section {
+            background: white;
+            padding: 3rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            margin-bottom: 2rem;
+            animation: fadeInUp 0.6s ease-out both;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .content-section:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 15px rgba(0,0,0,0.15);
+        }
+
+        .content-section:nth-child(2) { animation-delay: 0.9s; }
+        .content-section:nth-child(3) { animation-delay: 1.1s; }
+        .content-section:nth-child(4) { animation-delay: 1.3s; }
+        .content-section:nth-child(5) { animation-delay: 1.5s; }
+
+        .content-section h3 {
+            color: #ce1126;
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 3px solid #fcd116;
+            display: inline-block;
+        }
+
+        .content-section p {
+            font-size: 1.1rem;
+            line-height: 1.9;
+            color: #333;
+            margin-bottom: 1.5rem;
+            text-align: justify;
+        }
+
+        .content-section p:last-child {
+            margin-bottom: 0;
+        }
+
+        /* Image Container */
+        .image-wrapper {
+            text-align: center;
+            margin: 2rem 0;
+        }
+
+        .content-image {
+            width: 100%;
+            max-width: 500px;
+            margin: 0 auto;
+            display: block;
+            border-radius: 10px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+            border: 4px solid #fcd116;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+        }
+
+        .content-image:hover {
+            transform: scale(1.02);
+            box-shadow: 0 12px 30px rgba(0,0,0,0.3);
+        }
+
+        .image-caption {
+            text-align: center;
+            font-size: 0.9rem;
+            color: #666;
+            font-style: italic;
+            margin-top: 0.75rem;
+            line-height: 1.4;
+        }
+
+        .image-caption::after {
+            content: ' (Click to enlarge)';
+            color: #0038a8;
+            font-weight: 600;
+        }
+
+        /* Image Modal */
+        .image-modal {
+            display: none;
+            position: fixed;
+            z-index: 10000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            animation: fadeIn 0.3s ease;
+        }
+
+        .image-modal.active {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-content {
+            max-width: 90%;
+            max-height: 90%;
+            border-radius: 10px;
+            box-shadow: 0 0 50px rgba(252, 209, 22, 0.5);
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 20px;
+            right: 40px;
+            font-size: 40px;
+            color: #fcd116;
+            cursor: pointer;
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+
+        .modal-close:hover {
+            color: #ce1126;
+        }
+
+        /* Two Column Layout */
+        .two-column {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .column {
+            background: linear-gradient(135deg, rgba(0, 56, 168, 0.03), rgba(206, 17, 38, 0.03));
+            padding: 2rem;
+            border-radius: 8px;
+            border-left: 4px solid #fcd116;
+        }
+
+        /* Highlight Box */
+        .highlight-box {
+            background: linear-gradient(135deg, rgba(0, 56, 168, 0.08), rgba(206, 17, 38, 0.08));
+            padding: 2rem;
+            border-radius: 10px;
+            border-left: 6px solid #fcd116;
+            margin: 2rem 0;
+            position: relative;
+        }
+
+        .highlight-box::before {
+            content: '🧬';
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            font-size: 3rem;
+            opacity: 0.2;
+        }
+
+        .highlight-box h4 {
+            color: #0038a8;
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+        }
+
+        .highlight-box p {
+            font-style: italic;
+            color: #333;
+        }
+
+        .content-section {
+            scroll-margin-top: 100px; /* adjust based on nav height */
+        }
+
+        /* Footer */
+        footer {
+            background: linear-gradient(135deg, #ce1126 0%, #0038a8 100%);
+            color: white;
+            text-align: center;
+            padding: 2.5rem 2rem;
+            margin-top: 4rem;
+            position: relative;
+        }
+
+        footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: #fcd116;
+        }
+
+        footer p {
+            margin: 0.5rem 0;
+        }
+
+        .footer-accent {
+            display: inline-block;
+            width: 60px;
+            height: 3px;
+            background-color: #fcd116;
+            margin: 1rem auto;
+        }
+
+        .footer-authors {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-top: 1rem;
+        }
+
+        /* Navigation Buttons */
+        .nav-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 3rem;
+            gap: 1rem;
+        }
+
+        .nav-button {
+            background: linear-gradient(135deg, #0038a8, #ce1126);
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .nav-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.2);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 1.8rem;
+            }
+
+            .page-title h2 {
+                font-size: 1.6rem;
+            }
+
+            .content-section {
+                padding: 2rem;
+            }
+
+            .content-section h3 {
+                font-size: 1.5rem;
+            }
+
+            /* Mobile Navigation */
+            .mobile-menu-toggle {
+                display: block;
+            }
+
+            nav ul {
+                display: none;
+                flex-direction: column;
+                width: 100%;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                background: white;
+                box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            }
+
+            nav ul.active {
+                display: flex;
+            }
+
+            nav li {
+                width: 100%;
+            }
+
+            nav a {
+                padding: 1rem 2rem;
+                border-bottom: 1px solid #eee;
+            }
+
+            .dropdown-menu {
+                position: static;
+                box-shadow: none;
+                border-radius: 0;
+                background: rgba(0, 56, 168, 0.05);
+            }
+
+            .dropdown-menu a {
+                padding-left: 3rem;
+            }
+
+            .two-column {
+                grid-template-columns: 1fr;
+            }
+
+            .nav-buttons {
+                flex-direction: column;
+            }
+
+            .content-image {
+                max-width: 100%;
+            }
+
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <h1>The Shaping of a Hero</h1>
+            <p class="tagline">Exploring José Rizal's Character Development</p>
+        </div>
+    </header>
+
+    <nav>
+        <div class="nav-container">
+            <button class="mobile-menu-toggle" onclick="toggleMobileMenu()" aria-label="Toggle menu">
+                ☰
+            </button>
+            <ul id="nav-menu">
+                <li><a href="index.html">Home</a></li>
+                <li class="dropdown">
+                    <a class="dropdown-toggle">
+                        Shaping Factors
+                        <span class="dropdown-arrow">▼</span>
+                    </a>
+                    <div class="dropdown-menu">
+                        <a href="biological.html" class="active">Biological Factors</a>
+                        <a href="environmental.html">Environmental Factors</a>
+                    </div>
+                </li>
+                <li><a href="experiences.html">Life Experiences</a></li>
+                <li><a href="character.html">Character Analysis</a></li>
+                <li><a href="heroism.html">Pitfalls & Heroism</a></li>
+                <li><a href="conclusion.html">Conclusion</a></li>
+                <li class="dropdown">
+                    <a class="dropdown-toggle">
+                        See More
+                        <span class="dropdown-arrow">▼</span>
+                    </a>
+                    <div class="dropdown-menu">
+                        <a href="timeline.html">Timeline</a>
+                        <a href="media.html">Photos & Videos</a>
+                        <a href="references.html">References</a>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <main>
+        <div class="page-title">
+            <h2>🧬 Biological Factors</h2>
+            <p>The innate qualities and inherited traits that formed the foundation of Rizal's character</p>
+        </div>
+
+        <div class="content-section" id="inherited">
+            <h3>Inherited Traits & Characteristics</h3>
+            <div class="image-wrapper">
+                <img src="../img/Bio_1.png" alt="Rizal's Diverse Heritage" class="content-image" onclick="openImageModal(this)">
+                <p class="image-caption">A visual representation of José Rizal's rich multicultural ancestry</p>
+            </div>
+            
+            <p>José Rizal's character was rooted in a rich and diverse heritage, a remarkable blend of Filipino,
+                Spanish, and Chinese ancestry. This multicultural lineage was not merely a matter of genealogy; it
+                profoundly influenced his worldview, enabling him to bridge different cultures and perspectives with
+                unusual ease. From his Chinese ancestors, the Lam-co family, he inherited a tradition of scholarly
+                pursuits and business acumen. His Spanish lineage connected him to European intellectual traditions,
+                while his Filipino roots grounded him in Asian values of honor, family loyalty, and resilience.</p>
+
+            <p>More importantly, his intellect manifested early, showcasing a curious ability to recognize things that
+                were worthwhile. Even as a young child, Rizal demonstrated an exceptional capacity for observation and
+                learning. He possessed what his contemporaries described as an almost insatiable thirst for knowledge—a
+                trait that would define his entire life. This intellectual voracity was not learned but seemed to be
+                woven into the very fabric of his being, a gift from ancestors who valued education and enlightenment
+                across generations.</p>
+                
+            <div class="highlight-box">
+                <h4>The Foundation of Genius</h4>
+                <p>Rizal's biological inheritance provided him with the cognitive tools and temperament necessary for greatness. His naturally sharp mind, combined with inherited traits of perseverance and discipline, created the perfect foundation upon which environmental factors could build a hero.</p>
+            </div>
+        </div>
+
+        <div class="content-section">
+            <h3>The Story of the Moth: A Defining Moment</h3>
+            <div class="image-wrapper">
+                <img src="../img/Bio_2.png" alt="The Story of the Moth" class="content-image" onclick="openImageModal(this)">
+                <p class="image-caption">The fable that crystallized young Rizal's understanding of sacrifice and purpose. Image was AI Generated</p>
+            </div>
+
+            <p>This inherent idealism was crystallized during his childhood by a pivotal moment—his mother’s telling of The Story of the Moth. The fable recounted how a young moth, against the warnings of its mother, flew too close to a flame, drawn by its beauty and light. Despite being burned, the moth returned again and again until, at last, it perished in the fire it so admired.</p>
+
+            <p>The tale left a deep impression on young José. While his mother intended the story as a warning about obedience and caution, Rizal instead saw something different: he admired the moth’s courage to pursue the light despite the danger.</p>
+            
+            <p>From this simple story, Rizal formed an idea that would guide his outlook in later life—that true purpose sometimes requires sacrifice. To him, the moth’s fate was not meaningless but rather a symbol of pursuing ideals even at great personal cost. It became a reminder that suffering in the pursuit of truth and justice should not be feared, but accepted when necessary.</p>
+
+            
+        </div>
+
+        <div class="content-section" id="physical">
+            <h3>Physical Attributes & Their Impact</h3>
+            
+            <div class="two-column">
+                <div class="column">
+                    <div class="image-wrapper">
+                        <img src="../img/Bio_3.png" alt="Young José Rizal" class="content-image" onclick="openImageModal(this)">
+                        <p class="image-caption">José Rizal in his youth</p>
+                    </div>
+                </div>
+                <div class="column">
+                    <div class="image-wrapper">
+                        <img src="../img/Bio_4.png" alt="Rizal's Physical Appearance" class="content-image" onclick="openImageModal(this)">
+                        <p class="image-caption">Despite his modest stature, Rizal commanded great presence</p>
+                    </div>
+                </div>
+            </div>
+
+            <p>José Rizal stood at approximately five feet three inches—a modest height even by 19th-century standards. Yet, what he lacked in physical stature, he more than compensated for in presence and vitality. His contemporaries often remarked not on his size, but on his expressive eyes, which seemed to burn with intelligence and conviction. Those who met him described a man whose physical energy and animated conversation made his height utterly irrelevant.</p>
+
+            <p>Rizal's physical constitution was generally robust, though he suffered from occasional ailments that plagued many of his era. He maintained his health through active pursuits—fencing, gymnastics, and long walks—believing that a sound body was essential for a sound mind. This discipline extended to his work habits; he was known for his ability to focus intensely for hours, a feat that required both mental and physical stamina. His small frame housed remarkable endurance, allowing him to work through the night on his writings, medical studies, and various artistic endeavors.</p>
+
+            <p>Perhaps most significantly, Rizal's physical appearance—distinctly Asian in features—made him immediately recognizable as a Filipino in the European contexts where he studied and worked. This visibility was both a burden and an opportunity. He could not hide his identity or blend into European society, which forced him to confront issues of race and colonialism directly. Yet this same visibility also made him a living symbol of Filipino capability and dignity. His very presence in European intellectual circles challenged prevailing stereotypes about the supposed inferiority of colonized peoples.</p>
+        </div>
+
+        <div class="content-section" id="intellect">
+            <h3>Natural Intelligence & Abilities</h3>
+            <div class="image-wrapper">
+                <img src="../img/Bio_5.png" alt="Rizal's Multiple Talents" class="content-image" onclick="openImageModal(this)">
+                <p class="image-caption">A painting of Rizal "Dapitan Church Curtains" (1894)</p>
+            </div>
+            
+            <p>To call José Rizal intelligent would be a dramatic understatement. He was a polymath in the truest sense—a man whose intellectual gifts spanned multiple disciplines with remarkable depth. By the end of his short life, he had mastered at least 22 languages, practiced medicine, written two novels that would change the course of Philippine history, published numerous essays and poems, created sculptures and paintings, conducted scientific research, and even designed inventions and public works.</p>
+
+            <p>This extraordinary versatility was not the result of mere study, though Rizal was certainly diligent. Rather, it reflected an innate cognitive architecture that made learning itself effortless and joyful for him. He possessed what modern psychologists might call "fluid intelligence"—the ability to reason, identify patterns, and solve novel problems quickly. His mind seemed to make connections across disciplines naturally, allowing him to apply insights from medicine to his social critiques, or from linguistics to his understanding of cultural identity.</p>
+
+            <div class="highlight-box">
+                <h4>The Gift of Quick Mastery</h4>
+                <p>Contemporaries marveled at Rizal's ability to achieve in months what took others years. He completed medical degrees, learned new languages, and mastered artistic techniques with such speed that it sometimes aroused jealousy. Yet this facility was not superficial—his expertise in each field was genuine and deep, recognized by specialists in those very domains.</p>
+            </div>
+
+            <p>Perhaps most remarkable was Rizal's ability to synthesize knowledge across domains. He didn't simply collect skills like trophies; he integrated them into a coherent worldview. His medical training informed his social analysis of Philippine society's ailments. His linguistic abilities allowed him to access diverse intellectual traditions and communicate with people across cultural boundaries. His artistic sensibilities gave his written works an emotional power that mere logic could never achieve. His scientific mindset brought rigor and evidence to his political arguments.</p>
+
+            <p>Yet for all his brilliance, Rizal never displayed intellectual arrogance. He remained humble, always curious, always willing to learn from others. This temperament—combining extraordinary ability with genuine humility—was perhaps his most endearing trait. It allowed him to connect with people from all walks of life, from peasants to presidents, making him not just a genius but a beloved figure whose intelligence served humanity rather than merely his own ego.</p>
+
+            <p>This combination of inherited traits—diverse cultural heritage, exceptional intellect, modest but energetic physique, and a temperament shaped by the moth's tale—created the biological foundation upon which José Rizal would build his extraordinary life. Nature had given him the raw materials of greatness. What came next—the environmental influences and experiences that would shape these materials into the form of a national hero—would prove equally essential to understanding the complete man.</p>
+        </div>
+
+        <div class="nav-buttons">
+            <a href="index.html" class="nav-button">← Back to Home</a>
+            <a href="environmental.html" class="nav-button">Environmental Factors →</a>
+        </div>
+    </main>
+
+    <footer>
+        <div class="footer-accent"></div>
+        <p><strong>The Shaping of a Hero: José Rizal's Character Development</strong></p>
+        <p>A comprehensive study of the Philippines' national hero</p>
+        <p class="footer-authors">Summative Project by Tan, James Nathaniel and Masellones, Joshua Marc</p>
+        <p style="margin-top: 1rem; font-size: 0.9rem;">&copy; 2025 - MMCM</p>
+    </footer>
+
+    <!-- Image Modal -->
+    <div id="imageModal" class="image-modal" onclick="closeImageModal()">
+        <span class="modal-close" onclick="closeImageModal()">&times;</span>
+        <img class="modal-content" id="modalImage">
+    </div>
+
+    <script>
+        // Mobile menu toggle
+        function toggleMobileMenu() {
+            const menu = document.getElementById('nav-menu');
+            menu.classList.toggle('active');
+        }
+
+        // Dropdown toggle for mobile
+        function toggleDropdown(element) {
+            const dropdown = element.parentElement;
+            dropdown.classList.toggle('active');
+        }
+
+        // Image modal functions
+        function openImageModal(img) {
+            const modal = document.getElementById('imageModal');
+            const modalImg = document.getElementById('modalImage');
+            modal.classList.add('active');
+            modalImg.src = img.src;
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeImageModal() {
+            const modal = document.getElementById('imageModal');
+            modal.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+
+        // Close modal with Escape key
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') {
+                closeImageModal();
+            }
+        });
+
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Add subtle parallax effect to images
+        window.addEventListener('scroll', () => {
+            const images = document.querySelectorAll('.content-image');
+            images.forEach(img => {
+                const rect = img.getBoundingClientRect();
+                const rate = rect.top * 0.05;
+                img.style.transform = `translateY(${rate}px)`;
+            });
+        });
+
+        // Interactive section highlighting
+        const contentSections = document.querySelectorAll('.content-section');
+        const sectionObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.borderLeft = '6px solid #fcd116';
+                } else {
+                    entry.target.style.borderLeft = 'none';
+                }
+            });
+        }, { threshold: 0.3 });
+
+        contentSections.forEach(section => sectionObserver.observe(section));
+    </script>
+</body>
+</html>
