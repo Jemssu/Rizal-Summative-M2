@@ -1,6 +1,6 @@
-This is the Home Page of our Blog Site.
+
 I want you to make me the Conclusion Page.
-Please Copy the Theme and Styling of the Home Page.
+Please Copy the Theme and Styling of the Home / Other Pages Page.
 Requirements:
 * Interactive
 * Add Placeholder Images

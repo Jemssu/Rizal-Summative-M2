@@ -1,0 +1,904 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pitfalls & Heroism - The Shaping of a Hero</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', serif;
+            line-height: 1.6;
+            color: #000;
+            background-color: #f8f9fa;
+            opacity: 0;
+            animation: fadeIn 0.8s ease-in forwards;
+        }
+
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+            }
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(135deg, #0038a8 0%, #ce1126 100%);
+            color: white;
+            padding: 2rem 0;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            position: relative;
+            overflow: hidden;
+            animation: slideDown 0.6s ease-out 0.3s both;
+        }
+
+        @keyframes slideDown {
+            from {
+                transform: translateY(-100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg"><circle cx="50" cy="50" r="40" fill="none" stroke="rgba(252,209,22,0.1)" stroke-width="2"/></svg>');
+            opacity: 0.3;
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .tagline {
+            font-size: 1.1rem;
+            font-style: italic;
+            opacity: 0.95;
+        }
+
+        /* Navigation */
+        nav {
+            background-color: #fff;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            animation: slideDown 0.6s ease-out 0.5s both;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .mobile-menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            padding: 0.5rem;
+            color: #0038a8;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            margin: 0;
+            padding: 0;
+            flex-wrap: wrap;
+        }
+
+        nav li {
+            margin: 0;
+        }
+
+        nav a {
+            display: block;
+            padding: 1rem 1.5rem;
+            color: #000;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            border-bottom: 3px solid transparent;
+        }
+
+        nav a:hover {
+            background-color: #fcd116;
+            border-bottom-color: #ce1126;
+            transform: translateY(-2px);
+        }
+
+        nav a.active {
+            background-color: #0038a8;
+            color: white;
+            border-bottom-color: #fcd116;
+        }
+
+        /* Dropdown */
+        .dropdown {
+            position: relative;
+        }
+
+        /* Show dropdown on hover (desktop only) */
+        @media (min-width: 769px) {
+            .dropdown:hover .dropdown-menu {
+                display: block;
+                animation: fadeInDown 0.3s ease;
+            }
+
+            .dropdown:hover .dropdown-arrow {
+                transform: rotate(180deg);
+            }
+        }
+
+        .dropdown-toggle {
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+            cursor: pointer;
+        }
+
+        .dropdown-arrow {
+            font-size: 0.7rem;
+            transition: transform 0.3s ease;
+        }
+
+        .dropdown.active .dropdown-arrow {
+            transform: rotate(180deg);
+        }
+
+        .dropdown-menu {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: white;
+            min-width: 220px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            border-radius: 0 0 8px 8px;
+            overflow: hidden;
+            z-index: 1000;
+        }
+
+        .dropdown.active .dropdown-menu {
+            display: block;
+            animation: fadeInDown 0.3s ease;
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .dropdown-menu a {
+            display: block;
+            padding: 0.75rem 1.5rem;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .dropdown-menu a:last-child {
+            border-bottom: none;
+        }
+
+        .dropdown-menu a:hover {
+            background-color: #fcd116;
+            border-bottom-color: transparent;
+        }
+
+        /* Main Content */
+        main {
+            max-width: 1200px;
+            margin: 3rem auto;
+            padding: 0 2rem;
+        }
+
+        /* Page Title */
+        .page-title {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            margin-bottom: 3rem;
+            border-left: 6px solid #ce1126;
+            animation: fadeInUp 0.6s ease-out 0.7s both;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .page-title h2 {
+            color: #0038a8;
+            font-size: 2.2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .page-title p {
+            color: #666;
+            font-size: 1.1rem;
+            font-style: italic;
+        }
+
+        /* Content Section */
+        .content-section {
+            background: white;
+            padding: 3rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            margin-bottom: 2rem;
+            animation: fadeInUp 0.6s ease-out both;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            scroll-margin-top: 100px; /* adjust based on nav height */
+        }
+
+        .content-section:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 15px rgba(0,0,0,0.15);
+        }
+
+        .content-section:nth-child(2) { animation-delay: 0.9s; }
+        .content-section:nth-child(3) { animation-delay: 1.1s; }
+        .content-section:nth-child(4) { animation-delay: 1.3s; }
+        .content-section:nth-child(5) { animation-delay: 1.5s; }
+
+        .content-section h3 {
+            color: #ce1126;
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 3px solid #fcd116;
+            display: inline-block;
+        }
+
+        .content-section p {
+            font-size: 1.1rem;
+            line-height: 1.9;
+            color: #333;
+            margin-bottom: 1.5rem;
+            text-align: justify;
+        }
+
+        .content-section p:last-child {
+            margin-bottom: 0;
+        }
+
+        /* Bullet Lists */
+        .content-section ul {
+            list-style: none;
+            padding-left: 0;
+            margin: 1.5rem 0;
+        }
+
+        .content-section li {
+            padding: 0.75rem 0;
+            padding-left: 2rem;
+            position: relative;
+            color: #333;
+            font-size: 1.05rem;
+            line-height: 1.8;
+            transition: padding-left 0.3s ease;
+        }
+
+        .content-section li:hover {
+            padding-left: 2.5rem;
+        }
+
+        .content-section li:before {
+            content: "⭐";
+            position: absolute;
+            left: 0;
+            font-size: 1.2rem;
+            transition: left 0.3s ease;
+        }
+
+        .content-section li:hover:before {
+            left: 0.5rem;
+        }
+
+        /* Image Container */
+        .image-wrapper {
+            text-align: center;
+            margin: 2rem 0;
+        }
+
+        .content-image {
+            width: 100%;
+            max-width: 600px;
+            margin: 0 auto;
+            display: block;
+            border-radius: 10px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+            border: 4px solid #fcd116;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+        }
+
+        .content-image:hover {
+            transform: scale(1.02);
+            box-shadow: 0 12px 30px rgba(0,0,0,0.3);
+        }
+
+        .image-caption {
+            text-align: center;
+            font-size: 0.9rem;
+            color: #666;
+            font-style: italic;
+            margin-top: 0.75rem;
+            line-height: 1.4;
+        }
+
+        .image-caption::after {
+            content: ' (Click to enlarge)';
+            color: #0038a8;
+            font-weight: 600;
+        }
+
+        /* Image Modal */
+        .image-modal {
+            display: none;
+            position: fixed;
+            z-index: 10000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            animation: fadeIn 0.3s ease;
+        }
+
+        .image-modal.active {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-content {
+            max-width: 90%;
+            max-height: 90%;
+            border-radius: 10px;
+            box-shadow: 0 0 50px rgba(252, 209, 22, 0.5);
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 20px;
+            right: 40px;
+            font-size: 40px;
+            color: #fcd116;
+            cursor: pointer;
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+
+        .modal-close:hover {
+            color: #ce1126;
+        }
+
+        /* Highlight Box */
+        .highlight-box {
+            background: linear-gradient(135deg, rgba(0, 56, 168, 0.08), rgba(206, 17, 38, 0.08));
+            padding: 2rem;
+            border-radius: 10px;
+            border-left: 6px solid #fcd116;
+            margin: 2rem 0;
+            position: relative;
+        }
+
+        .highlight-box::before {
+            content: '⭐';
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            font-size: 3rem;
+            opacity: 0.2;
+        }
+
+        .highlight-box h4 {
+            color: #0038a8;
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+        }
+
+        .highlight-box p {
+            font-style: italic;
+            color: #333;
+        }
+
+        /* Two Column Layout */
+        .two-column {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .column {
+            background: linear-gradient(135deg, rgba(0, 56, 168, 0.03), rgba(206, 17, 38, 0.03));
+            padding: 2rem;
+            border-radius: 8px;
+            border-left: 4px solid #fcd116;
+        }
+
+        /* Footer */
+        footer {
+            background: linear-gradient(135deg, #ce1126 0%, #0038a8 100%);
+            color: white;
+            text-align: center;
+            padding: 2.5rem 2rem;
+            margin-top: 4rem;
+            position: relative;
+        }
+
+        footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: #fcd116;
+        }
+
+        footer p {
+            margin: 0.5rem 0;
+        }
+
+        .footer-accent {
+            display: inline-block;
+            width: 60px;
+            height: 3px;
+            background-color: #fcd116;
+            margin: 1rem auto;
+        }
+
+        .footer-authors {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-top: 1rem;
+        }
+
+        /* Navigation Buttons */
+        .nav-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 3rem;
+            gap: 1rem;
+        }
+
+        .nav-button {
+            background: linear-gradient(135deg, #0038a8, #ce1126);
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .nav-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.2);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 1.8rem;
+            }
+
+            .page-title h2 {
+                font-size: 1.6rem;
+            }
+
+            .content-section {
+                padding: 2rem;
+            }
+
+            .content-section h3 {
+                font-size: 1.5rem;
+            }
+
+            /* Mobile Navigation */
+            .mobile-menu-toggle {
+                display: block;
+            }
+
+            nav ul {
+                display: none;
+                flex-direction: column;
+                width: 100%;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                background: white;
+                box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            }
+
+            nav ul.active {
+                display: flex;
+            }
+
+            nav li {
+                width: 100%;
+            }
+
+            nav a {
+                padding: 1rem 2rem;
+                border-bottom: 1px solid #eee;
+            }
+
+            .dropdown-menu {
+                position: static;
+                box-shadow: none;
+                border-radius: 0;
+                background: rgba(0, 56, 168, 0.05);
+            }
+
+            .dropdown-menu a {
+                padding-left: 3rem;
+            }
+
+            .two-column {
+                grid-template-columns: 1fr;
+            }
+
+            .nav-buttons {
+                flex-direction: column;
+            }
+
+            .content-image {
+                max-width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <h1>The Shaping of a Hero</h1>
+            <p class="tagline">Exploring José Rizal's Character Development</p>
+        </div>
+    </header>
+
+    <nav>
+        <div class="nav-container">
+            <button class="mobile-menu-toggle" onclick="toggleMobileMenu()" aria-label="Toggle menu">
+                ☰
+            </button>
+            <ul id="nav-menu">
+                <li><a href="index.html">Home</a></li>
+                <li class="dropdown">
+                    <a class="dropdown-toggle">
+                        Shaping Factors
+                        <span class="dropdown-arrow">▼</span>
+                    </a>
+                    <div class="dropdown-menu">
+                        <a href="biological.html">Biological Factors</a>
+                        <a href="environmental.html">Environmental Factors</a>
+                    </div>
+                </li>
+                <li><a href="experiences.html">Life Experiences</a></li>
+                <li><a href="character.html">Character Analysis</a></li>
+                <li><a href="heroism.html" class="active">Pitfalls & Heroism</a></li>
+                <li><a href="conclusion.html">Conclusion</a></li>
+                <li class="dropdown">
+                    <a class="dropdown-toggle">
+                        See More
+                        <span class="dropdown-arrow">▼</span>
+                    </a>
+                    <div class="dropdown-menu">
+                        <a href="timeline.html">Timeline</a>
+                        <a href="media.html">More Media</a>
+                        <a href="references.html">References</a>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <main>
+        <div class="page-title">
+            <h2>⭐ Pitfalls & Heroism</h2>
+            <p>The trials, tribulations, and triumphs that forged José Rizal into the Philippines' greatest hero</p>
+        </div>
+
+        <div class="content-section" id="challenges">
+            <h3>Challenges & Obstacles Faced</h3>
+            <div class="image-wrapper">
+                <img src="https://placehold.co/800x400/ce1126/ffffff/png?text=Rizal's+Greatest+Trials&font=georgia" alt="Rizal's Challenges" class="content-image" onclick="openImageModal(this)">
+                <p class="image-caption">The severe obstacles that tested Rizal's resolve and character</p>
+            </div>
+            
+            <p>José Rizal's journey toward heroism was not a smooth ascent but rather a treacherous path fraught with severe challenges that would have broken lesser men. His life became a crucible of suffering, where each obstacle intensified his commitment to his people's freedom. These challenges were not abstract philosophical dilemmas but concrete, painful realities that affected him and those he loved most deeply.</p>
+
+            <p>The first devastating blow came with the condemnation and prohibition of his groundbreaking novel, <em>Noli Me Tangere</em>. Published in 1887, the book exposed the rot at the heart of Spanish colonial rule in the Philippines—the corruption of friars, the abuse of power, and the systematic oppression of Filipinos. The Spanish authorities and Catholic clergy immediately recognized the danger this work posed to their control. They condemned it as heretical, subversive, and dangerous, banning its distribution and possession throughout the archipelago. Anyone caught with a copy risked imprisonment or worse.</p>
+
+            <div class="highlight-box">
+                <h4>The Price of Truth</h4>
+                <p>Rizal's writings cost him everything—his family's peace, his freedom, and ultimately his life. Yet he never recanted, never apologized, never softened his message. His commitment to truth remained absolute, even when the price became unbearable.</p>
+            </div>
+
+            <p>But the authorities did not stop at merely banning his work. Unable to reach Rizal directly while he remained in Europe, they turned their fury on his family in the Philippines. The harassment intensified dramatically during the Calamba agrarian dispute, where the Dominican friars who owned vast estates clashed with Filipino tenant farmers over unjust rents and exploitative practices. Rizal's family, prominent members of the Calamba community, became targets of systematic persecution.</p>
+
+            <p>The colonial government orchestrated a campaign of intimidation and violence against the Rizal family. His siblings faced constant surveillance and harassment. The family's properties were threatened with confiscation. His aging parents endured humiliation and fear, watching helplessly as their son's fame brought danger to their doorstep. The message was clear: Rizal's defiance would not only cost him but would also bring suffering to everyone he loved. This psychological torture—knowing that his quest for justice was causing his family's persecution—weighed heavily on Rizal's conscience.</p>
+
+            <p>The situation deteriorated further with Rizal's arrest and subsequent exile to Dapitan in 1892. Accused of inciting rebellion through his writings and associations, he was banished to this remote town in Mindanao, far from Manila's intellectual circles and from his family. This exile was designed to silence him, to remove his influence from the heart of Philippine society, and to serve as a warning to others who might dare to challenge Spanish authority.</p>
+
+            <p>For four years, Rizal lived under constant surveillance in Dapitan, his movements restricted, his correspondence monitored, his visitors scrutinized. He was cut off from the growing reform movement he had helped inspire. News from Manila came slowly and was often censored. The colonial authorities hoped that isolation would break his spirit, that distance would diminish his influence, that time would erode his revolutionary fervor.</p>
+
+            <div class="two-column">
+                <div class="column">
+                    <h4>Personal Sacrifices</h4>
+                    <ul>
+                        <li>Forced separation from family and loved ones</li>
+                        <li>Constant surveillance and restriction of freedom</li>
+                        <li>Financial struggles and dependence on others</li>
+                        <li>Psychological burden of endangering his family</li>
+                        <li>Professional limitations and career sacrifices</li>
+                    </ul>
+                </div>
+                <div class="column">
+                    <h4>External Pressures</h4>
+                    <ul>
+                        <li>Colonial government persecution and harassment</li>
+                        <li>Church condemnation and religious opposition</li>
+                        <li>Social ostracism and character assassination</li>
+                        <li>Physical threats and danger to his life</li>
+                        <li>Censorship and suppression of his writings</li>
+                    </ul>
+                </div>
+            </div>
+
+            <p>Yet perhaps the greatest challenge was the moral dilemma Rizal faced: how to continue his advocacy knowing that his actions brought suffering to innocent people, particularly his own family. This internal conflict—between his duty to his nation and his love for his family—created an agonizing tension that pervaded his final years. It was a test not just of his courage but of his character, forcing him to confront the ultimate question: was the cause of Philippine freedom worth the price his loved ones were paying?</p>
+        </div>
+
+        <div class="content-section" id="heroic">
+            <h3>Heroic Acts & Contributions</h3>
+            <div class="image-wrapper">
+                <img src="https://placehold.co/800x400/0038a8/ffffff/png?text=Rizal's+Heroic+Legacy&font=georgia" alt="Rizal's Heroism" class="content-image" onclick="openImageModal(this)">
+                <p class="image-caption">The remarkable achievements that defined Rizal's heroic character</p>
+            </div>
+
+            <p>What distinguished José Rizal as a true hero was not merely that he faced these challenges, but how he transformed them into opportunities for service and sacrifice. His pitfalls became the forge for his heroism, each obstacle refined rather than destroyed his commitment to Philippine independence. Where others might have been broken by persecution, Rizal found renewed purpose. Where others might have fled or compromised, he stood firm and found creative ways to continue his mission.</p>
+
+            <p>Forced to leave the country due to the danger his presence posed to himself and his family, Rizal made a strategic decision that demonstrated his tactical brilliance: he realized he could serve his country more effectively by writing abroad. From the safety of Europe, he could publish works that would have been immediately suppressed in the Philippines. He could network with liberal thinkers and reformers, building international support for Philippine independence. He could study advanced ideas about government, society, and justice that were unavailable under Spanish censorship.</p>
+
+            <p>This period of European exile proved extraordinarily productive. Rizal completed his second novel, <em>El Filibusterismo</em>, a darker and more radical sequel to the <em>Noli</em> that predicted violent revolution if reforms were not enacted. He wrote numerous essays, poems, and articles that circulated clandestinely in the Philippines, keeping the flame of resistance alive. He corresponded with Filipino expatriates and sympathetic Europeans, building networks of support that would prove crucial to the independence movement.</p>
+
+            <div class="highlight-box">
+                <h4>From Exile to Action</h4>
+                <p>Rizal's genius lay in his ability to turn imposed limitations into strategic advantages. Exile became an opportunity for intellectual development. Restrictions on his movement became time for building community infrastructure. Even his final imprisonment became a platform for his most powerful writings.</p>
+            </div>
+
+            <p>His exile in Dapitan, intended as punishment and isolation, transformed into perhaps the most remarkable demonstration of his character. Rather than succumbing to bitterness or despair, Rizal threw himself into improving the lives of Dapitan's residents. This period showcased his belief that true patriotism is not just about grand gestures but about concrete service to one's community.</p>
+
+            <p>In Dapitan, Rizal established a school where he taught children and adults alike, providing education that emphasized critical thinking, scientific inquiry, and practical skills—a stark contrast to the rote memorization and religious indoctrination of colonial education. He taught without charge, believing education was a right, not a privilege. His students learned not just academic subjects but also the values of industry, honesty, and love of country.</p>
+
+            <div class="image-wrapper">
+                <img src="https://placehold.co/800x500/fcd116/000000/png?text=Rizal+in+Dapitan&font=georgia" alt="Rizal's Work in Dapitan" class="content-image" onclick="openImageModal(this)">
+                <p class="image-caption">Rizal transformed his exile into an opportunity for community service and development</p>
+            </div>
+
+            <p>He practiced medicine, treating the sick without discrimination and often without payment. His medical expertise saved lives and improved public health in a community that had limited access to healthcare. He designed and supervised the construction of a water system that brought clean water to the town, dramatically reducing waterborne diseases. He improved agricultural techniques, introducing new crops and methods that increased productivity. He even designed a town plaza and other infrastructure improvements that enhanced community life.</p>
+
+            <p>These practical contributions demonstrated Rizal's understanding that revolution is not just about political change but about improving people's daily lives. His work in Dapitan proved that a true patriot serves his country wherever he is, under whatever circumstances, with whatever resources are available. Exile became not a punishment but an opportunity for the practical application of his ideals.</p>
+
+            <p>Yet Rizal's heroism reached its zenith in his final, fatal decision to return to the Philippines. By 1896, he knew that returning meant almost certain death. The colonial authorities viewed him as the intellectual mastermind behind the independence movement (though he actually advocated peaceful reform rather than violent revolution). Revolutionary groups were invoking his name, and the Spanish government was looking for someone to blame for the growing unrest.</p>
+
+            <p>His return was fueled by a desire to confront his accusers directly, to defend his name and his work, and to stand with his countrymen at a crucial moment in their history. He foresaw that this decision would either restore his rights as a citizen or confirm his fate as a martyr. In a letter, he wrote prophetically about becoming a "martyr more," understanding that his death might accomplish more for Philippine independence than his life ever could.</p>
+
+            <div class="highlight-box">
+                <h4>The Ultimate Sacrifice</h4>
+                <p>Rizal's decision to return to the Philippines, knowing it meant probable death, was not recklessness but calculated sacrifice. He understood that his martyrdom would galvanize the independence movement, transforming abstract ideals into visceral reality. His death would make undeniable the brutality of colonial rule and inspire a generation to action.</p>
+            </div>
+
+            <p>This final act was the culmination of all his heroic qualities: his courage in facing death without flinching, his tactical understanding of how his martyrdom would serve the cause, his moral consistency in refusing to compromise his principles even to save his life, and his profound love for his country that made him willing to sacrifice everything. His execution on December 30, 1896, solidified his legacy as a hero whose sacrifice was both intentional and profound.</p>
+
+            <p>Rizal's heroic contributions can be summarized in several key areas:</p>
+
+            <ul>
+                <li><strong>Intellectual Liberation:</strong> His writings awakened Filipino consciousness, exposing the injustices of colonialism and inspiring a sense of national identity.</li>
+                <li><strong>Peaceful Reform Advocacy:</strong> He consistently argued for reform through education and legal means, offering an alternative to violent revolution.</li>
+                <li><strong>Educational Advancement:</strong> He established schools and taught countless students, spreading knowledge and critical thinking.</li>
+                <li><strong>Community Service:</strong> His practical work in Dapitan demonstrated how patriotism translates into concrete service.</li>
+                <li><strong>Moral Example:</strong> His personal integrity, courage, and sacrifice set a standard of heroism that inspired generations.</li>
+                <li><strong>Symbolic Martyrdom:</strong> His execution became a rallying point for the independence movement, galvanizing resistance against Spanish rule.</li>
+            </ul>
+        </div>
+
+        <div class="content-section" id="impact">
+            <h3>Impact on Philippine Independence</h3>
+            <div class="image-wrapper">
+                <img src="https://placehold.co/800x400/ce1126/ffffff/png?text=Rizal's+Lasting+Impact&font=georgia" alt="Impact on Independence" class="content-image" onclick="openImageModal(this)">
+                <p class="image-caption">How Rizal's sacrifice ignited the flame of Philippine independence</p>
+            </div>
+
+            <p>José Rizal's impact on Philippine independence cannot be overstated. Though he died two years before the Philippines declared independence and never lived to see the nation he dreamed of, his influence pervaded every aspect of the independence movement. He became not just a hero but the very symbol of Filipino resistance, the intellectual foundation upon which independence was built, and the moral compass that guided the nation's struggle for freedom.</p>
+
+            <p>The most immediate and dramatic impact of Rizal's execution was the ignition of revolutionary fervor throughout the Philippines. His death transformed what had been a primarily intellectual reform movement into a full-scale armed revolution. Filipinos who might have been content with gradual reforms saw in Rizal's execution the ultimate proof that Spain would never willingly grant justice or freedom. His martyrdom made the abstract concept of oppression painfully concrete and personal.</p>
+
+            <p>The Katipunan, the revolutionary society founded by Andrés Bonifacio, had already been using Rizal's writings as inspiration and justification for their cause. After his execution, membership swelled dramatically. "Rizal!" became a battle cry of the revolution. His image appeared on revolutionary flags and documents. Poems and songs commemorating his sacrifice spread throughout the archipelago, keeping his memory alive and his ideals present in the minds of revolutionaries.</p>
+
+            <div class="highlight-box">
+                <h4>The Power of Martyrdom</h4>
+                <p>Rizal's execution accomplished what years of peaceful advocacy could not: it united Filipinos across class, regional, and ideological lines. His death made collaboration with colonial authorities morally untenable for many who had previously sought accommodation. It proved that reform was impossible and revolution necessary.</p>
+            </div>
+
+            <p>Beyond the immediate revolutionary impact, Rizal's intellectual legacy provided the ideological foundation for Philippine nationalism. His novels had already accomplished the crucial work of creating a shared sense of Filipino identity. Before Rizal, the Philippines was a collection of distinct ethnic and linguistic groups with limited common consciousness. His writings helped forge these diverse peoples into a nation by articulating shared grievances, common values, and collective aspirations.</p>
+
+            <p><em>Noli Me Tangere</em> and <em>El Filibusterismo</em> did more than expose colonial abuses—they created a narrative of Philippine society that was recognizably Filipino. His characters became archetypes: the suffering masses, the corrupt friars, the collaborating elite, the noble patriot. Filipinos saw themselves and their society reflected in these works, creating a shared cultural reference point that transcended regional identities. This cultural nationalism was essential for political nationalism to emerge.</p>
+
+            <p>Rizal's advocacy for education as the path to national development profoundly influenced the independence movement and the post-independence nation. He consistently argued that Filipinos needed education to claim their rights and govern themselves effectively. This emphasis on education became central to Filipino nationalism. The revolutionary government established schools. The American colonial period saw massive expansion of public education, partly because Filipinos demanded it, having internalized Rizal's message about education's importance.</p>
+
+            <div class="image-wrapper">
+                <img src="https://placehold.co/800x500/0038a8/ffffff/png?text=Educational+Legacy&font=georgia" alt="Rizal's Educational Impact" class="content-image" onclick="openImageModal(this)">
+                <p class="image-caption">Rizal's emphasis on education shaped the Filipino nation for generations</p>
+            </div>
+
+            <p>His model of peaceful, rational reform—though ultimately unsuccessful in his lifetime—provided an important alternative tradition within Philippine political culture. Even as the revolution turned violent, Rizal's preference for peaceful change remained influential. Post-independence Philippine democracy, despite its many imperfections, reflects some of Rizal's values: the importance of law, the primacy of education, and the belief in rational discourse. His legacy offered a counterbalance to purely militaristic or authoritarian political models.</p>
+
+            <p>Perhaps most significantly, Rizal provided Filipinos with a hero who embodied intellectual excellence, moral courage, and selfless patriotism. In an era when colonial ideology insisted on Filipino inferiority, Rizal's extraordinary accomplishments—his mastery of multiple languages, his medical expertise, his literary genius, his scientific work—proved Filipino capability beyond any doubt. He demonstrated that Filipinos could compete with and surpass their colonizers in intellectual and artistic achievement.</p>
+
+            <p>His character became a national ideal. The qualities he embodied—integrity, courage, service, sacrifice, love of country—became the standards by which Filipino leaders would be judged. His example inspired countless Filipinos to pursue excellence, to serve their communities, and to stand up against injustice. Schools, streets, cities, and even the nation's flag bore his influence. December 30, the anniversary of his execution, became a national holiday, ensuring that each generation would remember his sacrifice.</p>
+
+            <p>The long-term impact of Rizal's life and death on Philippine independence can be measured in several dimensions:</p>
+
+            <ul>
+                <li><strong>Catalyst for Revolution:</strong> His execution directly precipitated the Philippine Revolution of 1896, transforming intellectual dissent into armed struggle.</li>
+                <li><strong>National Identity Formation:</strong> His writings created a shared Filipino consciousness that transcended regional and ethnic divisions, making nationhood conceivable.</li>
+                <li><strong>Intellectual Foundation:</strong> He provided the philosophical and moral justification for independence, articulating why Filipinos deserved self-governance.</li>
+                <li><strong>Educational Legacy:</strong> His emphasis on education shaped Philippine development priorities for generations, making literacy and learning national values.</li>
+                <li><strong>Moral Standard:</strong> He established a model of patriotic service and personal integrity that became the measure of Filipino leadership.</li>
+                <li><strong>International Recognition:</strong> His stature as an intellectual and martyr brought international attention to Philippine independence, garnering sympathy and support.</li>
+                <li><strong>Enduring Symbol:</strong> He remains the central symbol of Filipino nationalism, his image and ideals invoked in every generation's struggle for justice and progress.</li>
+            </ul>
+
+            <div class="highlight-box">
+                <h4>A Hero for All Generations</h4>
+                <p>Rizal's impact extends far beyond his role in achieving independence. He created a template for Filipino heroism that emphasizes brain over brawn, pen over sword, service over self-aggrandizement. His legacy continues to inspire Filipinos facing contemporary challenges, from corruption to inequality to threats to democracy. His question remains relevant: "What are you doing for your country?"</p>
+            </div>
+
+            <p>In the end, José Rizal's greatest impact may be this: he showed Filipinos that they were capable of greatness, worthy of freedom, and deserving of dignity. In a colonial system designed to convince Filipinos of their inferiority, Rizal's example was revolutionary. He didn't just fight for independence; he made independence imaginable by demonstrating Filipino excellence. He didn't just oppose colonialism; he created an alternative vision of what Filipinos could become as a free people.</p>
+
+            <p>His life proved that heroism doesn't require superhuman qualities but rather the full development of human potential in service of others. His death proved that sacrifice for principle is not futile but transformative. His legacy proved that ideas, properly articulated and courageously defended, can change the course of history. These lessons ensured that while José Rizal died on December 30, 1896, his influence on Philippine independence—and on the Filipino soul—would prove immortal.</p>
+        </div>
+
+        <div class="nav-buttons">
+            <a href="character.html" class="nav-button">← Character Analysis</a>
+            <a href="conclusion.html" class="nav-button">Conclusion →</a>
+        </div>
+    </main>
+
+    <footer>
+        <div class="footer-accent"></div>
+        <p><strong>The Shaping of a Hero: José Rizal's Character Development</strong></p>
+        <p>A comprehensive study of the Philippines' national hero</p>
+        <p class="footer-authors">Summative Project by Tan, James Nathaniel and Masellones, Joshua Marc</p>
+        <p style="margin-top: 1rem; font-size: 0.9rem;">&copy; 2025 - MMCM</p>
+    </footer>
+
+    <!-- Image Modal -->
+    <div id="imageModal" class="image-modal" onclick="closeImageModal()">
+        <span class="modal-close" onclick="closeImageModal()">&times;</span>
+        <img class="modal-content" id="modalImage">
+    </div>
+
+    <script>
+        // Mobile menu toggle
+        function toggleMobileMenu() {
+            const menu = document.getElementById('nav-menu');
+            menu.classList.toggle('active');
+        }
+
+        // Dropdown toggle for mobile
+        function toggleDropdown(element) {
+            const dropdown = element.parentElement;
+            dropdown.classList.toggle('active');
+        }
+
+        // Image modal functions
+        function openImageModal(img) {
+            const modal = document.getElementById('imageModal');
+            const modalImg = document.getElementById('modalImage');
+            modal.classList.add('active');
+            modalImg.src = img.src;
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeImageModal() {
+            const modal = document.getElementById('imageModal');
+            modal.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+
+        // Close modal with Escape key
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') {
+                closeImageModal();
+            }
+        });
+
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Add subtle parallax effect to images
+        window.addEventListener('scroll', () => {
+            const images = document.querySelectorAll('.content-image');
+            images.forEach(img => {
+                const rect = img.getBoundingClientRect();
+                const rate = rect.top * 0.05;
+                img.style.transform = `translateY(${rate}px)`;
+            });
+        });
+
+        // Interactive section highlighting
+        const contentSections = document.querySelectorAll('.content-section');
+        const sectionObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.borderLeft = '6px solid #fcd116';
+                } else {
+                    entry.target.style.borderLeft = 'none';
+                }
+            });
+        }, { threshold: 0.3 });
+
+        contentSections.forEach(section => sectionObserver.observe(section));
+    </script>
+</body>
+</html>
