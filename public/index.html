@@ -130,12 +130,30 @@
             animation: slideDown 0.6s ease-out 0.5s both;
         }
 
-        nav ul {
-            list-style: none;
-            display: flex;
+        .nav-container {
             max-width: 1200px;
             margin: 0 auto;
             padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .mobile-menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            padding: 0.5rem;
+            color: #0038a8;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            margin: 0;
+            padding: 0;
             flex-wrap: wrap;
         }
 
@@ -170,6 +188,18 @@
             position: relative;
         }
 
+        /* Show dropdown on hover (desktop only) */
+        @media (min-width: 769px) {
+            .dropdown:hover .dropdown-menu {
+                display: block;
+                animation: fadeInDown 0.3s ease;
+            }
+
+            .dropdown:hover .dropdown-arrow {
+                transform: rotate(180deg);
+            }
+        }
+
         .dropdown-toggle {
             display: flex;
             align-items: center;
@@ -182,7 +212,7 @@
             transition: transform 0.3s ease;
         }
 
-        .dropdown:hover .dropdown-arrow {
+        .dropdown.active .dropdown-arrow {
             transform: rotate(180deg);
         }
 
@@ -199,7 +229,7 @@
             z-index: 1000;
         }
 
-        .dropdown:hover .dropdown-menu {
+        .dropdown.active .dropdown-menu {
             display: block;
             animation: fadeInDown 0.3s ease;
         }
@@ -587,13 +617,44 @@
                 order: -1;
             }
 
+            /* Mobile Navigation */
+            .mobile-menu-toggle {
+                display: block;
+            }
+
             nav ul {
+                display: none;
                 flex-direction: column;
-                padding: 0;
+                width: 100%;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                background: white;
+                box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            }
+
+            nav ul.active {
+                display: flex;
+            }
+
+            nav li {
+                width: 100%;
             }
 
             nav a {
+                padding: 1rem 2rem;
                 border-bottom: 1px solid #eee;
+            }
+
+            .dropdown-menu {
+                position: static;
+                box-shadow: none;
+                border-radius: 0;
+                background: rgba(0, 56, 168, 0.05);
+            }
+
+            .dropdown-menu a {
+                padding-left: 3rem;
             }
 
             .sections-grid {
@@ -632,34 +693,39 @@
     </header>
 
     <nav>
-        <ul>
-            <li><a href="index.html" class="active">Home</a></li>
-            <li class="dropdown">
-                <a class="dropdown-toggle" onclick="return false;">
-                    Shaping Factors
-                    <span class="dropdown-arrow">▼</span>
-                </a>
-                <div class="dropdown-menu">
-                    <a href="biological.html">Biological Factors</a>
-                    <a href="environmental.html">Environmental Factors</a>
-                </div>
-            </li>
-            <li><a href="experiences.html">Life Experiences</a></li>
-            <li><a href="character.html">Character Analysis</a></li>
-            <li><a href="heroism.html">Pitfalls & Heroism</a></li>
-            <li><a href="conclusion.html">Conclusion</a></li>
-            <li class="dropdown">
-                <a class="dropdown-toggle" onclick="return false;">
-                    See More
-                    <span class="dropdown-arrow">▼</span>
-                </a>
-                <div class="dropdown-menu">
-                    <a href="timeline.html">Timeline</a>
-                    <a href="media.html">Photos & Videos</a>
-                    <a href="references.html">References</a>
-                </div>
-            </li>
-        </ul>
+        <div class="nav-container">
+            <button class="mobile-menu-toggle" onclick="toggleMobileMenu()" aria-label="Toggle menu">
+                ☰
+            </button>
+            <ul id="nav-menu">
+                <li><a href="index.html" class="active">Home</a></li>
+                <li class="dropdown">
+                    <a class="dropdown-toggle">
+                        Shaping Factors
+                        <span class="dropdown-arrow">▼</span>
+                    </a>
+                    <div class="dropdown-menu">
+                        <a href="biological.html">Biological Factors</a>
+                        <a href="environmental.html">Environmental Factors</a>
+                    </div>
+                </li>
+                <li><a href="experiences.html">Life Experiences</a></li>
+                <li><a href="character.html">Character Analysis</a></li>
+                <li><a href="heroism.html">Pitfalls & Heroism</a></li>
+                <li><a href="conclusion.html">Conclusion</a></li>
+                <li class="dropdown">
+                    <a class="dropdown-toggle">
+                        See More
+                        <span class="dropdown-arrow">▼</span>
+                    </a>
+                    <div class="dropdown-menu">
+                        <a href="timeline.html">Timeline</a>
+                        <a href="media.html">Photos & Videos</a>
+                        <a href="references.html">References</a>
+                    </div>
+                </li>
+            </ul>
+        </div>
     </nav>
 
     <main>
@@ -725,7 +791,7 @@
 
             <div class="section-card">
                 <div class="card-image">
-                    <div class="card-icon">🌏</div>
+                    <div class="card-icon">🌍</div>
                 </div>
                 <div class="card-content">
                     <h3>Life Experiences</h3>
@@ -797,6 +863,23 @@
             }, 1500);
         });
 
+        // Mobile menu toggle
+        function toggleMobileMenu() {
+            const menu = document.getElementById('nav-menu');
+            menu.classList.toggle('active');
+        }
+
+        // Dropdown toggle for mobile
+        document.querySelectorAll('.dropdown-toggle').forEach(toggle => {
+            toggle.addEventListener('click', function(e) {
+                if (window.innerWidth <= 768) {
+                    e.preventDefault();
+                    const dropdown = this.parentElement;
+                    dropdown.classList.toggle('active');
+                }
+            });
+        });
+
         // Rizal Quotes
         const quotes = [
             "One only dies once, and if one does not die well, a good opportunity is lost and will not present itself again.",
@@ -837,12 +920,6 @@
         // Initialize quote on load
         displayQuote();
         document.getElementById('quote-text').style.transition = 'opacity 0.3s ease';
-
-        
     </script>
-    
-</body> 
-</html> 
-
-
-
+</body>
+</html>
